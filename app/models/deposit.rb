@@ -70,7 +70,7 @@ class Deposit < ApplicationRecord
     end
 
     event :process do
-      transitions from: %i[aml_processing aml_suspicious accepted errored], to: :aml_processing do
+      transitions from: %i[aml_processing aml_suspicious accepted], to: :aml_processing do
         guard do
           Peatio::AML.adapter.present? || Peatio::App.config.manual_deposit_approval
         end
